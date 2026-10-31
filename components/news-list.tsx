@@ -4,19 +4,22 @@ import { useState } from "react";
 
 const filters = ["Sve", "Tribina", "Zajednica", "Historija", "Aktivnosti"];
 
-const posts = [
-  ["Tribina", "Zenički do kosti", "Najnovije priče i obavijesti sa tribine."],
-  ["Zajednica", "Više od 90 minuta", "Naša priča živi na stadionu, u gradu i među ljudima."],
-  ["Historija", "Od 1988. do danas", "Čuvamo sjećanja, ljude i trenutke koji traju."],
-  ["Aktivnosti", "Glas koji se čuje", "Mjesto za najave i aktivnosti Robijaša."],
-] as const;
+type NewsPost = { id: string; category: string; title: string; text: string; image: string | null };
 
-export function NewsList() {
+const demoPosts: NewsPost[] = [
+  { id: "demo-1", category: "Tribina", title: "Zenički do kosti", text: "Najnovije priče i obavijesti sa tribine.", image: null },
+  { id: "demo-2", category: "Zajednica", title: "Više od 90 minuta", text: "Naša priča živi na stadionu, u gradu i među ljudima.", image: null },
+  { id: "demo-3", category: "Historija", title: "Od 1988. do danas", text: "Čuvamo sjećanja, ljude i trenutke koji traju.", image: null },
+  { id: "demo-4", category: "Aktivnosti", title: "Glas koji se čuje", text: "Mjesto za najave i aktivnosti Robijaša.", image: null },
+];
+
+export function NewsList({ databasePosts = [] }: { databasePosts?: NewsPost[] }) {
   const [activeFilter, setActiveFilter] = useState("Sve");
+  const posts = databasePosts.length > 0 ? databasePosts : demoPosts;
   const visiblePosts =
     activeFilter === "Sve"
       ? posts
-      : posts.filter(([category]) => category === activeFilter);
+      : posts.filter((post) => post.category === activeFilter);
 
   return (
     <>
@@ -34,15 +37,15 @@ export function NewsList() {
         ))}
       </div>
       <div className="article-grid" aria-live="polite">
-        {visiblePosts.map(([category, title, text], index) => (
-          <article className="news-card" key={title}>
-            <div className={`news-card__image news-card__image--${(index % 3) + 1}`}>
+        {visiblePosts.map((post, index) => (
+          <article className="news-card" key={post.id}>
+            <div className={`news-card__image news-card__image--${(index % 3) + 1}`} style={post.image ? { backgroundImage: `url("${post.image}")` } : undefined}>
               <span>0{index + 1}</span>
             </div>
             <div className="news-card__body">
-              <p className="card-kicker">{category}</p>
-              <h3>{title}</h3>
-              <p>{text}</p>
+              <p className="card-kicker">{post.category}</p>
+              <h3>{post.title}</h3>
+              <p>{post.text}</p>
               <a className="text-link" href="/novosti">
                 Pročitaj više <span>↗</span>
               </a>

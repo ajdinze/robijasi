@@ -16,6 +16,26 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Admin lokalni razvoj
+
+Admin koristi Prisma ORM, SQLite bazu u lokalnom folderu `data/` i stvarne server-side sesije.
+Baza se kreira komandom `npm run db:push`, a prvi super admin se kreira iz
+sljedećih vrijednosti u `.env.local`:
+
+```env
+ADMIN_NAME=Super Admin
+ADMIN_EMAIL=admin@localhost
+ADMIN_PASSWORD=robijasi-demo
+```
+
+Prijava je dostupna na [http://localhost:3000/admin/login](http://localhost:3000/admin/login),
+a upravljanje korisnicima na [http://localhost:3000/admin/korisnici](http://localhost:3000/admin/korisnici).
+Samo `SUPER_ADMIN` može dodavati korisnike, mijenjati role, deaktivirati i brisati naloge.
+SQLite fajl se ne commit-a. Za produkciju se u `prisma/schema.prisma` promijeni
+datasource provider na `mysql`, postavi `DATABASE_URL` za MySQL/MariaDB, pokrene
+`npm run db:generate` i primijeni migracija. Aplikacijski auth i korisnički endpointi
+ostaju isti jer koriste Prisma modele, a ne direktni SQLite SQL.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
