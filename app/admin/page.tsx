@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { getCurrentUser } from "@/lib/auth";
 import { AdminShell } from "@/components/admin-shell";
 
@@ -27,7 +28,7 @@ export default async function AdminDashboardPage() {
           <article><strong>—</strong><h2>Korisnici</h2><p>Upravljanje rolama</p></article>
         </section>
         <section className="admin-dashboard__grid">
-          <div className="admin-panel-card"><p className="eyebrow">Brze akcije</p><h2>Šta želiš uraditi?</h2><div className="admin-actions"><a href="/novosti">+ Nova novost</a><a href="/galerija">+ Nova galerija</a><a href="/video">+ Novi video</a>{user.role === "SUPER_ADMIN" && <a href="/admin/korisnici">+ Upravljaj korisnicima</a>}</div></div>
+          <div className="admin-panel-card"><p className="eyebrow">Brze akcije</p><h2>Šta želiš uraditi?</h2><div className="admin-actions"><Link href="/admin/novosti">+ Nova novost</Link><Link href="/admin/galerije">+ Nova galerija</Link><Link href="/admin/videi">+ Novi video</Link>{user.role === "SUPER_ADMIN" && <Link href="/admin/korisnici">+ Upravljaj korisnicima</Link>}</div></div>
           <div className="admin-panel-card"><p className="eyebrow">Tvoj pristup</p><h2>{user.role === "SUPER_ADMIN" ? "Puna kontrola" : user.role === "ADMIN" ? "Administratorski pristup" : "Urednički pristup"}</h2><p>Prijavljen si kao {user.email}. Dozvole se provjeravaju na serveru za svaku zaštićenu akciju.</p></div>
         </section>
       </div>

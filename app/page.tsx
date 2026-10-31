@@ -1,5 +1,6 @@
 import { SiteHeader } from "@/components/site-header";
 import Image from "next/image";
+import Link from "next/link";
 
 const news = [
   {
@@ -77,9 +78,9 @@ export default function Home() {
               <p className="eyebrow">Iz tribine</p>
               <h2>Najnovije</h2>
             </div>
-            <a className="text-link" href="/novosti">
+            <Link className="text-link" href="/novosti">
               Sve novosti <span aria-hidden="true">→</span>
-            </a>
+            </Link>
           </div>
           <div className="news-grid">
             {news.map((item, index) => (
@@ -91,9 +92,9 @@ export default function Home() {
                   <p className="card-kicker">{item.category}</p>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
-                  <a className="text-link" href="/novosti">
+                  <Link className="text-link" href="/novosti">
                     Pročitaj više <span aria-hidden="true">↗</span>
-                  </a>
+                  </Link>
                 </div>
               </article>
             ))}

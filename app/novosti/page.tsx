@@ -7,7 +7,7 @@ export const instant = false;
 export default async function NovostiPage() {
   const news = await getDatabase().news.findMany({
     where: { status: "PUBLISHED" },
-    select: { id: true, title: true, excerpt: true, coverImageUrl: true, category: { select: { name: true } } },
+    select: { id: true, slug: true, title: true, excerpt: true, coverImageUrl: true, category: { select: { name: true } } },
     orderBy: { publishedAt: "desc" },
   });
 
@@ -15,6 +15,7 @@ export default async function NovostiPage() {
     <MockPage eyebrow="Iz tribine" title="Najnovije." intro="Novosti, aktivnosti i priče iz života Robijaša Zenica 1988.">
       <NewsList databasePosts={news.map((item) => ({
         id: String(item.id),
+        slug: item.slug,
         category: item.category.name,
         title: item.title,
         text: item.excerpt ?? "",
