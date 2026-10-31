@@ -1,4 +1,3 @@
-import { MatchdayCard } from "@/components/matchday-card";
 import { SiteHeader } from "@/components/site-header";
 import Image from "next/image";
 
@@ -42,8 +41,8 @@ export default function Home() {
               <strong>Jedna tribina.</strong>
             </h1>
             <div className="hero__actions">
-              <a className="button button--primary" href="#matchday">
-                Sljedeća utakmica <span aria-hidden="true">↗</span>
+              <a className="button button--primary" href="/historija">
+                Istraži našu priču <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>
@@ -51,19 +50,6 @@ export default function Home() {
             <span />
             scroll to explore
           </div>
-        </section>
-
-        <section className="matchday-section container" id="matchday">
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Matchday</p>
-              <h2>Sljedeći okršaj</h2>
-            </div>
-            <a className="text-link" href="/utakmice">
-              Sve utakmice <span aria-hidden="true">→</span>
-            </a>
-          </div>
-          <MatchdayCard />
         </section>
 
         <section className="story-section" id="story">

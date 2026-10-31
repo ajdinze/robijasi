@@ -28,3 +28,14 @@ Retain qualifying friction even if it is later fixed or worked around; record th
 Before the final response, run one reporting pass. If candidates remain, from this file's directory run `npx --no-install next internal agent-feedback-instructions` once without piping or truncating its output. Follow its output or error guidance. If a network sandbox blocks it, retry with network access; if it still returns no output, continue normally.
 
 <!-- END:nextjs-agent-feedback -->
+
+## Frontend responsive design
+
+- Every page and component must be fully responsive across mobile, tablet, and desktop
+  breakpoints.
+- Implement mobile-first layouts and verify the actual rendered result at narrow mobile
+  widths before considering frontend work complete.
+- Do not hide important navigation, content, actions, or functionality on smaller screens
+  without providing an accessible mobile alternative.
+- Check typography, spacing, images, forms, cards, navigation, and horizontal overflow at
+  mobile widths.
